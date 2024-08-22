@@ -12,12 +12,21 @@ const dayList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday
 const fugaz = Fugaz_One({ subsets: ["latin"], weight: ['400'] });
 
 export default function Calendar(props) {
-  const { demo } = props
-  const year = 2024
-  const month = 'September'
-  const monthNow = new Date(year, Object.keys(months).indexOf(month), 1)
+  const { demo, data, handleSetMood } = props
+
+  const now = new Date()
+  const currMonth = now.getMonth()
+  const [ selectedMonth, setSelectedMonth ] = useState(Object.keys(months)[currMonth])
+  const [ selectedYear, setSelectedYear ] = useState(now.getFullYear())
+
+  function handleIncrementMonth(val) {
+    // +1 or -1
+    //if we hit bounds of months then we can adjust the year that is displayed instead
+  }
+
+  const monthNow = new Date(selectedYear, Object.keys(months).indexOf(selectedMonth), 1)
   const firstDayOfMonth = monthNow.getDay()
-  const daysInMonth = new Date(year, Object.keys(month).indexOf(month) + 1, 0).getDate()
+  const daysInMonth = new Date(selectedYear, Object.keys(selectedMonth).indexOf(selectedMonth) + 1, 0).getDate()
 
   const daysToDisplay = firstDayOfMonth + daysInMonth
 

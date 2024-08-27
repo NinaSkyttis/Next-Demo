@@ -32,6 +32,7 @@ export function AuthProvider({children}) {
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, async user => {
+      let firebaseData = {}
       try {
         // Set the user to our local context state
         setLoading(true)
@@ -44,7 +45,6 @@ export function AuthProvider({children}) {
         console.log('Fetching user data')
         const docRef = doc(db, 'users', user.uid)
         const docSnap = await getDoc(docRef)
-        let firebaseData = {}
 
         if (docSnap.exists()) {
           console.log('Found user data')
